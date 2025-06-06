@@ -17,7 +17,7 @@ export default function Home() {
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
                 <span className="text-2xl font-bold text-purple-700">
-                  LearnHub
+                  Learnify
                 </span>
               </div>
               {/* Removed menu items here */}
@@ -427,7 +427,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <div className="text-2xl font-bold text-white mb-4">LearnHub</div>
+              <div className="text-2xl font-bold text-white mb-4">Learnify</div>
               <p className="text-gray-400 mb-4">
                 The leading platform for online education and professional
                 development.
@@ -573,7 +573,7 @@ export default function Home() {
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2025 LearnHub. All rights reserved.
+              © 2025 Learnify. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0 flex space-x-6">
               <div className="flex items-center text-gray-400">
