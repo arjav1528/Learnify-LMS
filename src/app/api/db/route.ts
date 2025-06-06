@@ -12,11 +12,11 @@ export async function GET(){
             dbName: db.databaseName,
             collections: await db.listCollections().toArray(),
         });
-    }catch (error : any) {
+    }catch (error) {
         console.error("Database connection error:", error);
         return NextResponse.json({
             message: "Database connection failed",
-            error: error.message,
+            error: error,
         }, { status: 500 });
     }
 }
