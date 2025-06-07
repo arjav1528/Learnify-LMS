@@ -5,7 +5,6 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { useSignUp, useUser } from '@clerk/nextjs';
 import toast, { Toaster } from 'react-hot-toast';
-import { clerkClient } from '@clerk/nextjs/server';
 
 export const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
