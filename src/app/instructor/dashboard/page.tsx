@@ -129,7 +129,7 @@ export default function InstructorDashboard() {
 
   // Chart height calculation based on max revenue
   const maxRevenue = Math.max(...monthlyRevenue.map(item => item.amount));
-  const getBarHeight = (amount : any) => (amount / maxRevenue) * 100;
+  const getBarHeight = (amount : number) => (amount / maxRevenue) * 100;
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
