@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from 'next/image'; // Import Next.js Image component
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
 
 export default function Home() {
   // Remove unused state or comment it for later use
@@ -24,7 +25,8 @@ export default function Home() {
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
               {/* Removed search box here */}
-              <button
+              <SignInButton>
+                <button
                 id="signInButton"
                 onClick={() =>
                   document
@@ -34,10 +36,13 @@ export default function Home() {
               >
                 Sign In
               </button>
+              </SignInButton>
               {/* Sign In Modal remains unchanged */}
-              <button className="bg-white text-purple-700 border border-purple-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-50 transition-colors duration-200 !rounded-button whitespace-nowrap cursor-pointer">
-                Sign Up
-              </button>
+              <SignUpButton>
+                <button className="bg-white text-purple-700 border border-purple-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-50 transition-colors duration-200 !rounded-button whitespace-nowrap cursor-pointer">
+                  Sign Up
+                </button>
+              </SignUpButton>
             </div>
             <div className="flex items-center sm:hidden">
               <button
