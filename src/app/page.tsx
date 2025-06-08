@@ -98,9 +98,11 @@ export default function Home() {
                   courses.
                 </p>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                  <button className="bg-white text-purple-700 px-6 py-3 rounded-lg text-base font-medium hover:bg-gray-100 transition-colors duration-200 !rounded-button whitespace-nowrap cursor-pointer">
-                    Get Started
-                  </button>
+                  <SignUpButton>
+                    <button className="bg-white text-purple-700 px-6 py-3 rounded-lg text-base font-medium hover:bg-gray-100 transition-colors duration-200 !rounded-button whitespace-nowrap cursor-pointer">
+                      Get Started
+                    </button>
+                  </SignUpButton>
                   <button className="bg-transparent text-white border border-white px-6 py-3 rounded-lg text-base font-medium hover:bg-white/10 transition-colors duration-200 !rounded-button whitespace-nowrap cursor-pointer">
                     <i className="fas fa-play-circle mr-2"></i> How it works
                   </button>
