@@ -25,7 +25,9 @@ export default function Home() {
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
               {/* Removed search box here */}
-              <SignInButton>
+              <SignInButton
+                fallbackRedirectUrl={"/complete-profile"}
+              >
                 <button
                 id="signInButton"
                 onClick={() =>
@@ -37,8 +39,10 @@ export default function Home() {
                 Sign In
               </button>
               </SignInButton>
+              
               {/* Sign In Modal remains unchanged */}
-              <SignUpButton>
+              <SignUpButton
+                fallbackRedirectUrl={"/complete-profile"}>
                 <button className="bg-white text-purple-700 border border-purple-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-50 transition-colors duration-200 !rounded-button whitespace-nowrap cursor-pointer">
                   Sign Up
                 </button>
@@ -62,12 +66,19 @@ export default function Home() {
             <div className="pt-2 pb-3 space-y-1">
               {/* You may want to update mobile menu options too */}
               <div className="px-3 py-3 space-y-2">
-                <button className="w-full bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-800 transition-colors duration-200 !rounded-button whitespace-nowrap cursor-pointer">
-                  Sign In
-                </button>
-                <button className="w-full bg-white text-purple-700 border border-purple-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-50 transition-colors duration-200 !rounded-button whitespace-nowrap cursor-pointer">
-                  Sign Up
-                </button>
+                <SignInButton>
+                  fallbackRedirectUrl={"/complete-profile"}
+                  <button className="w-full bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-800 transition-colors duration-200 !rounded-button whitespace-nowrap cursor-pointer">
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton>
+                  fallbackRedirectUrl={"/complete-profile"}
+                  <button className="w-full bg-white text-purple-700 border border-purple-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-50 transition-colors duration-200!rounded-button whitespace-nowrap cursor-pointer">
+                    Sign Up
+                  </button>
+                </SignUpButton>
+
               </div>
             </div>
           </div>
@@ -98,7 +109,8 @@ export default function Home() {
                   courses.
                 </p>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                  <SignUpButton>
+                  <SignUpButton
+                    fallbackRedirectUrl={"/complete-profile"}>
                     <button className="bg-white text-purple-700 px-6 py-3 rounded-lg text-base font-medium hover:bg-gray-100 transition-colors duration-200 !rounded-button whitespace-nowrap cursor-pointer">
                       Get Started
                     </button>
