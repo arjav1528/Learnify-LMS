@@ -11,6 +11,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 export default function CompleteProfile() {
   const { user } = useUser();
+  const router = useRouter();
   const userId = user?.id;
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
