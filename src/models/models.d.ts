@@ -9,10 +9,11 @@ export type Gateway = 'stripe' | 'razorpay';
 export interface UserProfile {
   id?: string;
   clerkId: string; // Clerk user ID
+  firstName: string;
+  lastName: string;
+  email: string;
   role: Role;
   bio?: string;
-  profileImage?: string;
-  socialLinks?: string[];
   createdAt: Date;
 }
 
