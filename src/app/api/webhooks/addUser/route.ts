@@ -171,3 +171,7 @@ export async function POST(req: NextRequest) {
     return new NextResponse("User created", { status: 200 });
     
 }
+
+export async function GET(req: NextRequest) {
+    return new NextResponse(JSON.stringify(dummy), { status: 200 });
+}
