@@ -2,7 +2,7 @@ import { clerkClient, clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/
 import { NextRequest, NextResponse } from 'next/server';
 
 // Routes that don't require authentication
-const publicRoutes = ['/', '/api/user/update','/api/webhooks/addUser', '/api/db'];
+const publicRoutes = ['/', '/api/user/update','/api/webhook', '/api/db'];
 const isPublicRoute = createRouteMatcher(publicRoutes);
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
