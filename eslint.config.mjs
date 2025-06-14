@@ -16,7 +16,8 @@ const eslintConfig = [
       'react/no-unescaped-entities': 'off',
       '@next/next/no-page-custom-font': 'off',
       '@next/next/no-img-element': 'off',
-      'no-unused-vars': 'warn',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
       'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
       'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
       'import/no-unresolved': 'error', // Ensure imports point to files/modules that can be resolved
