@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
-import { motion } from 'framer-motion';
 import { 
   FaBook, 
   FaUsers, 
@@ -15,10 +14,6 @@ import {
 import { Button } from '../../../components/ui/button';
 import { Card } from '../../../components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
-import { Input } from '../../../components/ui/input';
-import { Label } from '../../../components/ui/label';
-import { Textarea } from '../../../components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
 import { toast, Toaster } from 'react-hot-toast';
 
 // Types based on models
@@ -53,35 +48,19 @@ export default function InstructorDashboard() {
 
   // Fetch instructor data
   React.useEffect(() => {
-    // TODO: Backend Integration
-    // Fetch instructor's courses
-    // Fetch analytics data
-    // Example:
-    // const fetchData = async () => {
-    //   const response = await fetch('/api/instructor/dashboard');
-    //   const data = await response.json();
-    //   setCourses(data.courses);
-    //   setAnalytics(data.analytics);
-    // };
-    // fetchData();
+    toast.error('Backend integration not implemented');
   }, []);
 
   const handleCreateCourse = () => {
-    // TODO: Backend Integration
-    // Implement course creation logic
-    toast.success('Course creation functionality to be implemented');
+    toast.error('Course creation functionality not implemented');
   };
 
   const handleEditCourse = (courseId: string) => {
-    // TODO: Backend Integration
-    // Implement course editing logic
-    toast.success('Course editing functionality to be implemented');
+    toast.error('Course editing functionality not implemented');
   };
 
   const handleDeleteCourse = (courseId: string) => {
-    // TODO: Backend Integration
-    // Implement course deletion logic
-    toast.success('Course deletion functionality to be implemented');
+    toast.error('Course deletion functionality not implemented');
   };
 
   return (

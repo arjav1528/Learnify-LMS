@@ -3,13 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast, Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 // Types based on models
 type CourseLevel = 'beginner' | 'intermediate' | 'advanced';
@@ -25,7 +25,15 @@ interface CourseFormData {
   tags: string[];
 }
 
-export default function EditCourse({ params }: { params: { courseId: string } }) {
+interface PageProps {
+  params: Promise<{
+    courseId: string;
+  }>;
+}
+
+export default function EditCourse({ params }: PageProps) {
+  const resolvedParams = React.use(params);
+  const { courseId } = resolvedParams;
   const router = useRouter();
   const { user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +58,7 @@ export default function EditCourse({ params }: { params: { courseId: string } })
     //   setFormData(data);
     // };
     // fetchCourse();
-  }, [params.courseId]);
+  }, [courseId]);
 
   const handleInputChange = (field: keyof CourseFormData, value: string | number | string[]) => {
     setFormData(prev => ({

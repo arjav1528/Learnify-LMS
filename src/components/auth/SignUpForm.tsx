@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Eye, EyeOff, Mail, Lock, User, UserRound, ArrowLeft } from 'lucide-react';
+import { Eye, EyeOff, ArrowLeft, Mail, User, UserRound, LockIcon } from 'lucide-react';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { useSignUp, useUser } from '@clerk/nextjs';
@@ -322,7 +322,7 @@ export const SignUpForm = () => {
               Password
             </Label>
             <div className="relative">
-              <Lock className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4.5 h-4.5" />
+              <LockIcon className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4.5 h-4.5" />
               <Input
                 id="signup-password"
                 type={showPassword ? 'text' : 'password'}
@@ -348,7 +348,7 @@ export const SignUpForm = () => {
               Confirm Password
             </Label>
             <div className="relative">
-              <Lock className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4.5 h-4.5" />
+              <LockIcon className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4.5 h-4.5" />
               <Input
                 id="signup-confirm-password"
                 type={showConfirmPassword ? 'text' : 'password'}

@@ -5,8 +5,6 @@ import Image from 'next/image'; // Import Next.js Image component
 import { SignInButton, SignUpButton } from "@clerk/nextjs";
 
 export default function Home() {
-  // Remove unused state or comment it for later use
-  // const [activeTab, setActiveTab] = useState("overview");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   
   return (
