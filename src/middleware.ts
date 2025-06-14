@@ -2,13 +2,19 @@ import { clerkClient, clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/
 import { NextRequest, NextResponse } from 'next/server';
 
 // Routes that don't require authentication
-const publicRoutes = ['/', '/api/user/update','/api/webhook', '/api/db'];
+const publicRoutes = ['/'];
+const APIRoutes = ['/api/user/update','/api/webhook', '/api/db'];
 const isPublicRoute = createRouteMatcher(publicRoutes);
+const isAPIRoute = createRouteMatcher(APIRoutes);
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
   try {
     const { userId } = await auth();
     const path = req.nextUrl.pathname;
+
+    if (isAPIRoute(req)) {
+      return NextResponse.next();
+    }
     
     if (isPublicRoute(req)) {
       if (!userId) return NextResponse.next();
@@ -21,9 +27,7 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
     const client = await clerkClient();
     const user = await client.users.getUser(userId);
     
-    if (path === '/api/user/update') {
-      return NextResponse.next();
-    }
+    
 
     console.log(user.unsafeMetadata.role);
     

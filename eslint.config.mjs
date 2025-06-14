@@ -10,8 +10,8 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends({
-    extends: ['next'],
+  ...compat.extends('next'),
+  {
     rules: {
       'react/no-unescaped-entities': 'off',
       '@next/next/no-page-custom-font': 'off',
@@ -23,7 +23,7 @@ const eslintConfig = [
       'import/named': 'error', // Ensure named imports correspond to a named export in the remote file
       'import/default': 'error', //
     }
-  }),
+  }
 ];
 
 export default eslintConfig;

@@ -1,6 +1,5 @@
 import { connectToDatabase } from "@/lib/mongodb";
 import { Role, UserProfile } from "@/models/models";
-import { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { Webhook } from "svix";
@@ -37,7 +36,7 @@ export async function POST(req: NextRequest) {
         'svix-id': svix_id,
         'svix-timestamp': svix_timestamp,
         'svix-signature': svix_signature,
-      }) as WebhookEvent;
+      });
     } catch (err) {
       console.error('Error verifying webhook:', err);
       return new NextResponse('Error verifying webhook', { status: 400 });
@@ -90,12 +89,12 @@ export async function POST(req: NextRequest) {
             return new NextResponse("User not found", { status: 404 });
         }
 
-        const role : Role = evt.data.unsafe_metadata.role as Role || "student";
+        const role : Role = evt.data.unsafe_metadata.role as Role || "";
 
         const user : UserProfile = {
             clerkId: evt.data.id || "",
-            firstName : evt.data.id || "",
-            lastName : evt.data.id || "",
+            firstName : evt.data.first_name || "",
+            lastName : evt.data.last_name || "",
             email: evt.data.email_addresses?.[0]?.email_address || "",
             role : role,
             bio : evt.data.unsafe_metadata.bio || "",
@@ -116,7 +115,7 @@ export async function POST(req: NextRequest) {
     }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     return new NextResponse(
         JSON.stringify({
             message: "Hello World",
