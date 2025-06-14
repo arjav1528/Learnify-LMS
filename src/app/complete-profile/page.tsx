@@ -65,7 +65,7 @@ export default function CompleteProfile() {
       toast.success("Profile updated successfully!");
 
       // Redirect or perform any other actions after successful profile update
-      const router = useRouter();
+      
       if(formData.role === 'instructor'){
         router.push('/instructor/dashboard');
       }else{
@@ -81,7 +81,7 @@ export default function CompleteProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -98,7 +98,7 @@ export default function CompleteProfile() {
             <FaUser className="h-10 w-10 text-purple-600" />
           </motion.div>
           <h2 className="text-3xl font-extrabold text-gray-900">Complete Your Profile</h2>
-          <p className="mt-3 text-md text-gray-600">
+          <p className="mt-3 text-md text-gray-800">
             Let's set up your account to personalize your learning experience
           </p>
         </div>
@@ -106,34 +106,34 @@ export default function CompleteProfile() {
         <form className="mt-10 space-y-7" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
             <div>
-              <Label htmlFor="firstName" className="text-gray-700 font-medium">First Name</Label>
+              <Label htmlFor="firstName" className="text-gray-900 font-medium">First Name</Label>
               <Input
                 id="firstName"
                 type="text"
                 required
                 value={formData.firstName}
                 onChange={(e) => handleInputChange('firstName', e.target.value)}
-                className="mt-1 focus:ring-purple-500 focus:border-purple-500 shadow-sm bg-white text-gray-800"
+                className="mt-1 focus:ring-purple-500 focus:border-purple-500 shadow-sm bg-white text-gray-900"
                 placeholder="John"
               />
             </div>
 
             <div>
-              <Label htmlFor="lastName" className="text-gray-700 font-medium">Last Name</Label>
+              <Label htmlFor="lastName" className="text-gray-900 font-medium">Last Name</Label>
               <Input
                 id="lastName"
                 type="text"
                 required
                 value={formData.lastName}
                 onChange={(e) => handleInputChange('lastName', e.target.value)}
-                className="mt-1 focus:ring-purple-500 focus:border-purple-500 shadow-sm bg-white text-gray-800"
+                className="mt-1 focus:ring-purple-500 focus:border-purple-500 shadow-sm bg-white text-gray-900"
                 placeholder="Doe"
               />
             </div>
           </div>
 
           <div>
-            <Label htmlFor="role" className="text-gray-700 font-medium mb-2 block">I want to join as</Label>
+            <Label htmlFor="role" className="text-gray-900 font-medium mb-2 block">I want to join as</Label>
             <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
               <motion.button
                 whileHover={{ scale: 1.02 }}
@@ -141,15 +141,15 @@ export default function CompleteProfile() {
                 type="button"
                 className={`p-5 border-2 rounded-xl text-center transition-all ${
                   formData.role === 'student' 
-                    ? 'border-purple-500 bg-purple-50 text-purple-700 shadow-md' 
-                    : 'border-gray-200 hover:border-purple-300'
+                    ? 'border-purple-500 bg-purple-50 text-purple-900 shadow-md' 
+                    : 'border-gray-200 hover:border-purple-300 text-gray-900'
                 }`}
                 onClick={() => handleInputChange('role', 'student')}
               >
                 <div className="flex flex-col items-center">
                   <FaGraduationCap className="h-8 w-8 mb-2 text-purple-500" />
-                  <div className="font-semibold text-lg">Student</div>
-                  <div className="text-sm text-gray-500 mt-1">I want to learn new skills</div>
+                  <div className="font-semibold text-lg text-gray-900">Student</div>
+                  <div className="text-sm text-gray-800 mt-1">I want to learn new skills</div>
                 </div>
               </motion.button>
               
@@ -159,22 +159,22 @@ export default function CompleteProfile() {
                 type="button"
                 className={`p-5 border-2 rounded-xl text-center transition-all ${
                   formData.role === 'instructor' 
-                    ? 'border-purple-500 bg-purple-50 text-purple-700 shadow-md' 
-                    : 'border-gray-200 hover:border-purple-300'
+                    ? 'border-purple-500 bg-purple-50 text-purple-900 shadow-md' 
+                    : 'border-gray-200 hover:border-purple-300 text-gray-900'
                 }`}
                 onClick={() => handleInputChange('role', 'instructor')}
               >
                 <div className="flex flex-col items-center">
                   <FaChalkboardTeacher className="h-8 w-8 mb-2 text-purple-500" />
-                  <div className="font-semibold text-lg">Instructor</div>
-                  <div className="text-sm text-gray-500 mt-1">I want to share my knowledge</div>
+                  <div className="font-semibold text-lg text-gray-900">Instructor</div>
+                  <div className="text-sm text-gray-800 mt-1">I want to share my knowledge</div>
                 </div>
               </motion.button>
             </div>
           </div>
 
           <div>
-            <Label htmlFor="bio" className="text-gray-700 font-medium">Bio</Label>
+            <Label htmlFor="bio" className="text-gray-900 font-medium">Bio</Label>
             <motion.div
               whileHover={{ boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)" }}
               className="mt-2 relative rounded-xl border border-gray-300 bg-white overflow-hidden"
@@ -184,12 +184,12 @@ export default function CompleteProfile() {
                 id="bio"
                 value={formData.bio}
                 onChange={(e) => handleInputChange('bio', e.target.value)}
-                className="border-none pt-4 px-4 focus:ring-0 text-base placeholder:text-gray-400 bg-white text-gray-800"
+                className="border-none pt-4 px-4 focus:ring-0 text-base placeholder:text-gray-500 bg-white text-gray-900"
                 placeholder="Tell us a little about yourself..."
               />
               <div className="p-3 bg-gray-50 border-t border-gray-100 flex justify-between items-center">
-                <div className="text-xs text-gray-500">Share your interests or goals</div>
-                <div className="text-xs font-medium text-purple-600">
+                <div className="text-xs text-gray-800">Share your interests or goals</div>
+                <div className="text-xs font-medium text-purple-700">
                   {formData.bio.length}/250 characters
                 </div>
               </div>
