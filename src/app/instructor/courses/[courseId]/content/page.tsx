@@ -157,24 +157,38 @@ export default function CourseContent({ params }: PageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-xl shadow-lg p-8"
+          className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100"
         >
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Course Content</h1>
-            <Button onClick={handleAddSection} className="flex items-center gap-2">
-              <FaPlus /> Add Section
+          <div className="flex justify-between items-center mb-12">
+            <div className="space-y-2">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                Course Content
+              </h1>
+              <p className="text-gray-600 text-lg">Organize your course content into sections and lectures</p>
+            </div>
+            <Button 
+              onClick={handleAddSection} 
+              className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white transition-all duration-200 shadow-lg hover:shadow-xl px-6 py-3 rounded-xl"
+            >
+              <FaPlus className="text-lg" /> Add Section
             </Button>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-10">
             {sections.map((section, index) => (
-              <div key={section.id || `section-${index}`} className="border rounded-lg p-4">
+              <motion.div
+                key={section.id || `section-${index}`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className="border border-gray-200 rounded-2xl p-8 bg-white shadow-lg hover:shadow-xl transition-all duration-300"
+              >
                 {editingSection?.id === section.id ? (
                   <div className="space-y-4">
                     <Input
@@ -190,40 +204,82 @@ export default function CourseContent({ params }: PageProps) {
                         }
                       }}
                       placeholder="Section Title"
+                      className="text-lg border-2 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
                     />
-                    <div className="flex gap-2">
-                      <Button onClick={() => editingSection && handleSaveSection(editingSection)}>Save</Button>
-                      <Button variant="outline" onClick={() => setEditingSection(null)}>Cancel</Button>
+                    <div className="flex gap-3">
+                      <Button 
+                        onClick={() => editingSection && handleSaveSection(editingSection)}
+                        className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
+                      >
+                        Save Changes
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        onClick={() => setEditingSection(null)}
+                        className="border-2 border-gray-300 hover:bg-gray-50 transition-colors duration-200"
+                      >
+                        Cancel
+                      </Button>
                     </div>
                   </div>
                 ) : (
                   <div className="flex justify-between items-center">
-                    <h3 className="text-xl font-semibold">{section.title}</h3>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={() => setEditingSection(section)}>
-                        <FaEdit />
+                    <h3 className="text-2xl font-bold text-gray-800">{section.title}</h3>
+                    <div className="flex gap-3">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={() => setEditingSection(section)}
+                        className="hover:bg-blue-50 border-2 border-blue-200"
+                      >
+                        <FaEdit className="text-blue-600" />
                       </Button>
-                      <Button variant="outline" size="sm" onClick={() => section.id && handleDeleteSection(section.id)}>
-                        <FaTrash />
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={() => section.id && handleDeleteSection(section.id)}
+                        className="hover:bg-red-50 border-2 border-red-200"
+                      >
+                        <FaTrash className="text-red-600" />
                       </Button>
-                      <Button variant="outline" size="sm" onClick={() => section.id && handleReorderSection(section.id, 'up')}>
-                        <FaArrowUp />
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={() => section.id && handleReorderSection(section.id, 'up')}
+                        className="hover:bg-gray-50 border-2 border-gray-200"
+                      >
+                        <FaArrowUp className="text-gray-600" />
                       </Button>
-                      <Button variant="outline" size="sm" onClick={() => section.id && handleReorderSection(section.id, 'down')}>
-                        <FaArrowDown />
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={() => section.id && handleReorderSection(section.id, 'down')}
+                        className="hover:bg-gray-50 border-2 border-gray-200"
+                      >
+                        <FaArrowDown className="text-gray-600" />
                       </Button>
-                      <Button size="sm" onClick={() => section.id && handleAddLecture(section.id)}>
+                      <Button 
+                        size="sm" 
+                        onClick={() => section.id && handleAddLecture(section.id)}
+                        className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
+                      >
                         <FaPlus /> Add Lecture
                       </Button>
                     </div>
                   </div>
                 )}
 
-                <div className="mt-4 space-y-2">
+                <div className="mt-8 space-y-4">
                   {lectures
                     .filter(lecture => lecture.sectionId === section.id)
                     .map((lecture, index) => (
-                      <div key={lecture.id || `lecture-${section.id}-${index}`} className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <motion.div
+                        key={lecture.id || `lecture-${section.id}-${index}`}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2, delay: index * 0.05 }}
+                        className="flex justify-between items-center p-6 bg-gradient-to-r from-gray-50 to-white rounded-xl hover:shadow-md transition-all duration-200 border border-gray-100"
+                      >
                         {editingLecture?.id === lecture.id ? (
                           <div className="flex-1 space-y-4">
                             <Input
@@ -243,57 +299,77 @@ export default function CourseContent({ params }: PageProps) {
                                 }
                               }}
                               placeholder="Lecture Title"
+                              className="text-base border-2 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
                             />
-                            <Select
-                              value={editingLecture?.type ?? 'video'}
-                              onValueChange={(value) => {
-                                if (editingLecture) {
-                                  setEditingLecture({
-                                    ...editingLecture,
-                                    type: value as 'video' | 'document' | 'quiz'
-                                  });
-                                }
-                              }}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select type" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="video">Video</SelectItem>
-                                <SelectItem value="document">Document</SelectItem>
-                                <SelectItem value="quiz">Quiz</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <div className="flex gap-2">
-                              <Button onClick={() => editingLecture && handleSaveLecture(editingLecture)}>Save</Button>
-                              <Button variant="outline" onClick={() => setEditingLecture(null)}>Cancel</Button>
+                            <div className="flex gap-3">
+                              <Button 
+                                onClick={() => editingLecture && handleSaveLecture(editingLecture)}
+                                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
+                              >
+                                Save Changes
+                              </Button>
+                              <Button 
+                                variant="outline" 
+                                onClick={() => setEditingLecture(null)}
+                                className="border-2 border-gray-300 hover:bg-gray-50 transition-colors duration-200"
+                              >
+                                Cancel
+                              </Button>
                             </div>
                           </div>
                         ) : (
-                          <>
-                            <div className="flex items-center gap-2">
-                              <span className="font-medium">{lecture.title}</span>
-                              <span className="text-sm text-gray-500">({lecture.type})</span>
+                          <div className="flex items-center gap-6 flex-1">
+                            <div className="flex-1">
+                              <h4 className="text-lg font-semibold text-gray-800">{lecture.title}</h4>
+                              <div className="flex items-center gap-3 mt-1">
+                                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                                  lecture.type === 'video' 
+                                    ? 'bg-blue-100 text-blue-700'
+                                    : lecture.type === 'document'
+                                    ? 'bg-purple-100 text-purple-700'
+                                    : 'bg-green-100 text-green-700'
+                                }`}>
+                                  {lecture.type.charAt(0).toUpperCase() + lecture.type.slice(1)}
+                                </span>
+                                <span className="text-sm text-gray-500">
+                                  {lecture.duration} minutes
+                                </span>
+                                {lecture.isPreview && (
+                                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-700">
+                                    Preview
+                                  </span>
+                                )}
+                              </div>
                             </div>
                             <div className="flex gap-2">
-                              <Button variant="outline" size="sm" onClick={() => setEditingLecture(lecture)}>
-                                <FaEdit />
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                onClick={() => setEditingLecture(lecture)}
+                                className="hover:bg-blue-50 border-2 border-blue-200"
+                              >
+                                <FaEdit className="text-blue-600" />
                               </Button>
-                              <Button variant="outline" size="sm" onClick={() => lecture.id && handleDeleteLecture(lecture.id)}>
-                                <FaTrash />
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                onClick={() => lecture.id && handleDeleteLecture(lecture.id)}
+                                className="hover:bg-red-50 border-2 border-red-200"
+                              >
+                                <FaTrash className="text-red-600" />
                               </Button>
                             </div>
-                          </>
+                          </div>
                         )}
-                      </div>
+                      </motion.div>
                     ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
       </div>
-      <Toaster />
+      <Toaster position="top-right" />
     </div>
   );
 } 

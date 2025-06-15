@@ -64,29 +64,31 @@ export default function InstructorDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100">
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Header Section */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Learnify Instructor</h1>
-          <p className="text-gray-800">Welcome back, {user?.firstName || 'Instructor'}. Manage your courses and track your progress.</p>
+          <div className="rounded-xl bg-gradient-to-r from-purple-600 to-purple-400 p-6 shadow-lg flex flex-col md:flex-row md:items-center md:justify-between">
+            <div>
+              <h1 className="text-4xl font-bold text-white mb-1">Learnify Instructor</h1>
+              <p className="text-purple-100">Welcome back, {user?.firstName || 'Instructor'}. Manage your courses and track your progress.</p>
+            </div>
+            <Button
+              onClick={handleCreateCourse}
+              className="mt-4 md:mt-0 bg-white text-purple-700 hover:bg-purple-100 px-6 py-2 rounded-lg font-semibold shadow transition-all duration-200 flex items-center"
+            >
+              <FaPlus className="mr-2" /> Create New Course
+            </Button>
+          </div>
         </div>
 
-        <div className="flex justify-between items-center mb-8">
-          <div className="space-y-1">
-            <h2 className="text-2xl font-semibold text-gray-900">Dashboard Overview</h2>
-            <p className="text-sm text-gray-700">Monitor your teaching performance and student engagement</p>
-          </div>
-          <Button onClick={handleCreateCourse} className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition-all duration-200">
-            <FaPlus className="mr-2" /> Create New Course
-          </Button>
-        </div>
+        <div className="border-b border-gray-200 mb-8"></div>
 
         {/* Analytics Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <Card className="p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-200 bg-white">
             <div className="flex items-center">
-              <div className="p-3 bg-purple-100 rounded-full">
+              <div className="p-3 bg-purple-100 rounded-full shadow">
                 <FaBook className="h-6 w-6 text-purple-600" />
               </div>
               <div className="ml-4">
@@ -95,10 +97,9 @@ export default function InstructorDashboard() {
               </div>
             </div>
           </Card>
-
-          <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+          <Card className="p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-200 bg-white">
             <div className="flex items-center">
-              <div className="p-3 bg-green-100 rounded-full">
+              <div className="p-3 bg-green-100 rounded-full shadow">
                 <FaUsers className="h-6 w-6 text-green-600" />
               </div>
               <div className="ml-4">
@@ -107,10 +108,9 @@ export default function InstructorDashboard() {
               </div>
             </div>
           </Card>
-
-          <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+          <Card className="p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-200 bg-white">
             <div className="flex items-center">
-              <div className="p-3 bg-blue-100 rounded-full">
+              <div className="p-3 bg-blue-100 rounded-full shadow">
                 <FaChartLine className="h-6 w-6 text-blue-600" />
               </div>
               <div className="ml-4">
@@ -119,10 +119,9 @@ export default function InstructorDashboard() {
               </div>
             </div>
           </Card>
-
-          <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+          <Card className="p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-200 bg-white">
             <div className="flex items-center">
-              <div className="p-3 bg-yellow-100 rounded-full">
+              <div className="p-3 bg-yellow-100 rounded-full shadow">
                 <FaMoneyBillWave className="h-6 w-6 text-yellow-600" />
               </div>
               <div className="ml-4">
@@ -135,11 +134,11 @@ export default function InstructorDashboard() {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="bg-white p-1 rounded-lg shadow-sm">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 text-black rounded-md px-4 py-2">Overview</TabsTrigger>
-            <TabsTrigger value="courses" className="data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 text-black rounded-md px-4 py-2">My Courses</TabsTrigger>
-            <TabsTrigger value="students" className="data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 text-black rounded-md px-4 py-2">Students</TabsTrigger>
-            <TabsTrigger value="revenue" className="data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 text-black rounded-md px-4 py-2">Revenue</TabsTrigger>
+          <TabsList className="bg-white p-1 rounded-lg shadow-sm flex gap-2">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 text-black rounded-md px-4 py-2 font-medium">Overview</TabsTrigger>
+            <TabsTrigger value="courses" className="data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 text-black rounded-md px-4 py-2 font-medium">My Courses</TabsTrigger>
+            <TabsTrigger value="students" className="data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 text-black rounded-md px-4 py-2 font-medium">Students</TabsTrigger>
+            <TabsTrigger value="revenue" className="data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 text-black rounded-md px-4 py-2 font-medium">Revenue</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -155,7 +154,7 @@ export default function InstructorDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {courses.length === 0 ? (
                 <div className="col-span-full">
-                  <Card className="p-8 text-center">
+                  <Card className="p-8 text-center bg-gradient-to-br from-purple-50 to-white">
                     <div className="mb-4">
                       <FaBook className="h-12 w-12 text-gray-400 mx-auto" />
                     </div>
@@ -168,18 +167,22 @@ export default function InstructorDashboard() {
                 </div>
               ) : (
                 courses.map((course) => (
-                  <Card key={course.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-200">
+                  <Card
+                    key={course.id}
+                    className="overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-200 bg-white group"
+                  >
                     <div className="aspect-video relative">
                       <img
                         src={course.thumbnail}
                         alt={course.title}
-                        className="object-cover w-full h-full"
+                        className="object-cover w-full h-full transition-transform duration-200 group-hover:scale-105"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                       <div className="absolute top-2 right-2">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        <span className={`px-2 py-1 rounded-full text-xs font-semibold shadow ${
                           course.isPublished 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-yellow-100 text-yellow-800'
+                            ? 'bg-green-100 text-green-800 border border-green-200' 
+                            : 'bg-yellow-100 text-yellow-800 border border-yellow-200'
                         }`}>
                           {course.isPublished ? 'Published' : 'Draft'}
                         </span>
@@ -196,7 +199,7 @@ export default function InstructorDashboard() {
                             <span>⏱️ {course.totalDuration}h</span>
                           </div>
                         </div>
-                        <div className="space-x-2">
+                        <div className="space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                           <Button
                             variant="outline"
                             size="sm"
@@ -239,7 +242,6 @@ export default function InstructorDashboard() {
           </TabsContent>
         </Tabs>
       </div>
-
       <Toaster position="bottom-right" />
     </div>
   );
