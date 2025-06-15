@@ -4,14 +4,13 @@ import { NextRequest, NextResponse } from 'next/server';
 // Routes that don't require authentication
 const publicRoutes = ['/'];
 const isPublicRoute = createRouteMatcher(publicRoutes);
-const isAPIRoute = createRouteMatcher(['/api/', '/trpc/']);
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
   try {
     const { userId } = await auth();
     const path = req.nextUrl.pathname;
 
-    if (isAPIRoute(req)) {
+    if (path.startsWith('/_next') || path.startsWith('/api/') || path.startsWith('/trpc/')) {
       return NextResponse.next();
     }
     
