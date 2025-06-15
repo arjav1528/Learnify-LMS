@@ -60,11 +60,11 @@ export async function POST(req: NextRequest) {
         }
     
         const role : Role = evt.data.unsafe_metadata.role as Role || "student";
-    
-        const user : UserProfile = {
+
+        const user = {
             clerkId: evt.data.id || "",
-            firstName : evt.data.id || "",
-            lastName : evt.data.id || "",
+            firstName : evt.data.first_name || "",
+            lastName : evt.data.last_name || "",
             email: evt.data.email_addresses?.[0]?.email_address || "",
             role : role,
             bio : evt.data.unsafe_metadata.bio || "",
