@@ -7,7 +7,7 @@ export type PaymentStatus = 'pending' | 'success' | 'failed';
 export type Gateway = 'stripe' | 'razorpay';
 
 export interface UserProfile {
-  id?: string;
+  _id?: string;
   clerkId: string; // Clerk user ID
   firstName: string;
   lastName: string;
@@ -18,24 +18,18 @@ export interface UserProfile {
 }
 
 export interface Category {
-  id?: string;
+  _id?: string;
   name: string;
   slug: string;
 }
 
 export interface Tag {
-  id?: string;
+  _id?: string;
   name: string;
 }
 
-export interface CourseTag {
-  id?: string;
-  courseId: string;
-  tagId: string;
-}
-
 export interface Course {
-  id?: string;
+  _id?: string;
   title: string;
   slug: string;
   description: string;
@@ -53,14 +47,14 @@ export interface Course {
 }
 
 export interface Section {
-  id?: string;
+  _id?: string;
   courseId: string;
   title: string;
   order: number;
 }
 
 export interface Lecture {
-  id?: string;
+  _id?: string;
   sectionId: string;
   title: string;
   type: LectureType;
@@ -71,7 +65,7 @@ export interface Lecture {
 }
 
 export interface Quiz {
-  id?: string;
+  _id?: string;
   lectureId: string;
   questions: Question[];
 }
@@ -83,7 +77,7 @@ export interface Question {
 }
 
 export interface Enrollment {
-  id: string;
+  _id: string;
   studentId: string;
   courseId: string;
   enrolledAt: Date;
@@ -92,7 +86,7 @@ export interface Enrollment {
 }
 
 export interface LectureProgress {
-  id?: string;
+  _id?: string;
   enrollmentId: string;
   lectureId: string;
   watchedDuration: number; // in minutes
@@ -100,7 +94,7 @@ export interface LectureProgress {
 }
 
 export interface Order {
-  id?: string;
+  _id?: string;
   userId: string;
   courseId: string;
   amount: number;
@@ -110,7 +104,7 @@ export interface Order {
 }
 
 export interface Review {
-  id?: string;
+  _id?: string;
   courseId: string;
   userId: string;
   rating: number; // 1 to 5
@@ -119,7 +113,7 @@ export interface Review {
 }
 
 export interface Certificate {
-  id?: string;
+  _id?: string;
   userId: string;
   courseId: string;
   certificateUrl: string;
