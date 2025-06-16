@@ -1,6 +1,7 @@
 import { connectToDatabase } from '@/lib/mongodb';
-import { v2 as cloudinary } from 'cloudinary';
+import { cloudinary } from '@/lib/cloudinary';
 import { NextRequest, NextResponse } from 'next/server';
+import { CourseLevel } from '@/models/models';
 
 
 
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest){
 
         const buffer = Buffer.from(await file.arrayBuffer());
 
-        const uploadResult : CloudinaryUploadResult = await new Promise<CloudinaryUploadResult>((resolve, reject) => {
+        const uploadResult : CloudinaryUploadResult = await new Promise((resolve, reject) => {
             cloudinary.uploader.upload_stream(
                 {
                     resource_type: 'auto',
@@ -49,10 +50,16 @@ export async function POST(req: NextRequest){
             title,
             description: formData.get('description')?.toString() || '',
             instructorId: formData.get('instructorId')?.toString() || '',
-            thumbnail: uploadResult.public_id,
+            thumbnail: uploadResult.secure_url,
             price: parseFloat(formData.get('price')?.toString() || '0'),
-            category: formData.get('category')?.toString() || '',
-            level: formData.get('level')?.toString() || '',
+            categoryId: formData.get('categoryId')?.toString() || '',
+            level: formData.get('level')?.toString() as CourseLevel || 'beginner',
+            language: formData.get('language')?.toString() || '',
+            tags: JSON.parse(formData.get('tags')?.toString() || '[]'),
+            isPublished: false,
+            rating: 0,
+            totalDuration: 0,
+            createdAt: new Date(),
             slug: '', // This will be set later
         };
 
