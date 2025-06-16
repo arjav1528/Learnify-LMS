@@ -15,9 +15,11 @@ import { Button } from '../../../components/ui/button';
 import { Card } from '../../../components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
 import { toast, Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 // Types based on models
 interface Course {
+  _id?: string;
   id?: string;
   title: string;
   description: string;
@@ -37,6 +39,7 @@ interface Analytics {
 
 export default function InstructorDashboard() {
   const { user } = useUser();
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('overview');
   const [courses, setCourses] = useState<Course[]>([]);
   const [analytics, setAnalytics] = useState<Analytics>({
@@ -48,11 +51,42 @@ export default function InstructorDashboard() {
 
   // Fetch instructor data
   React.useEffect(() => {
-    toast.error('Backend integration not implemented');
-  }, []);
+    const fetchInstructorData = async () => {
+      try {
+        if (!user?.id) return;
+
+        // Fetch courses
+        const coursesResponse = await fetch(`/api/courses?instructorId=${user.id}`);
+        if (!coursesResponse.ok) {
+          throw new Error('Failed to fetch courses');
+        }
+        const coursesData = await coursesResponse.json();
+        setCourses(coursesData.courses);
+
+        // Calculate analytics
+        const totalRevenue = coursesData.courses.reduce((sum: number, course: Course) => sum + course.price, 0);
+        const averageRating = coursesData.courses.length > 0 
+          ? coursesData.courses.reduce((sum: number, course: Course) => sum + course.rating, 0) / coursesData.courses.length 
+          : 0;
+
+        setAnalytics({
+          totalStudents: 0, // TODO: Implement student count
+          totalRevenue,
+          averageRating,
+          totalCourses: coursesData.courses.length
+        });
+      } catch (error) {
+        console.error('Error fetching instructor data:', error);
+        toast.error('Failed to load instructor data');
+      }
+    };
+
+    fetchInstructorData();
+  }, [user?.id]);
 
   const handleCreateCourse = () => {
-    toast.error('Course creation functionality not implemented');
+    // toast.error('Course creation functionality not implemented');
+    router.push('/instructor/courses/create');
   };
 
   const handleEditCourse = (courseId: string) => {
@@ -168,7 +202,7 @@ export default function InstructorDashboard() {
               ) : (
                 courses.map((course) => (
                   <Card
-                    key={course.id}
+                    key={course._id || course.id}
                     className="overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-200 bg-white group"
                   >
                     <div className="aspect-video relative">

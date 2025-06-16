@@ -56,7 +56,7 @@ export async function POST(req: NextRequest){
             level: formData.get('level')?.toString() as CourseLevel || 'beginner',
             language: formData.get('language')?.toString() || '',
             tags: JSON.parse(formData.get('tags')?.toString() || '[]'),
-            isPublished: false,
+            isPublished: true,
             rating: 0,
             totalDuration: 0,
             createdAt: new Date(),
