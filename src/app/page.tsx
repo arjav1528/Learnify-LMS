@@ -170,38 +170,32 @@ export default function Home() {
               {
                 name: "Web Development",
                 icon: "fa-code",
-                image:
-                  "https://readdy.ai/api/search-image?query=Modern%20web%20development%20concept%20with%20clean%20design%2C%20code%20symbols%2C%20purple%20gradient%20background%2C%20minimalist%20style%2C%20professional%20look%2C%20suitable%20for%20a%20learning%20platform%20category%20icon&width=200&height=200&seq=cat-1&orientation=squarish",
+                image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=200&h=200&fit=crop",
               },
               {
                 name: "Data Science",
                 icon: "fa-chart-bar",
-                image:
-                  "https://readdy.ai/api/search-image?query=Data%20science%20concept%20with%20charts%2C%20graphs%2C%20data%20visualization%20elements%2C%20purple%20gradient%20background%2C%20minimalist%20style%2C%20professional%20look%2C%20suitable%20for%20a%20learning%20platform%20category%20icon&width=200&height=200&seq=cat-2&orientation=squarish",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop",
               },
               {
                 name: "Business",
                 icon: "fa-briefcase",
-                image:
-                  "https://readdy.ai/api/search-image?query=Business%20and%20management%20concept%20with%20professional%20elements%2C%20briefcase%20icon%2C%20purple%20gradient%20background%2C%20minimalist%20style%2C%20clean%20design%2C%20suitable%20for%20a%20learning%20platform%20category%20icon&width=200&height=200&seq=cat-3&orientation=squarish",
+                image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=200&h=200&fit=crop",
               },
               {
                 name: "Design",
                 icon: "fa-palette",
-                image:
-                  "https://readdy.ai/api/search-image?query=Graphic%20and%20UI%20design%20concept%20with%20design%20tools%2C%20color%20palette%2C%20purple%20gradient%20background%2C%20minimalist%20style%2C%20professional%20look%2C%20suitable%20for%20a%20learning%20platform%20category%20icon&width=200&height=200&seq=cat-4&orientation=squarish",
+                image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&h=200&fit=crop",
               },
               {
                 name: "Marketing",
                 icon: "fa-bullhorn",
-                image:
-                  "https://readdy.ai/api/search-image?query=Digital%20marketing%20concept%20with%20megaphone%2C%20social%20media%20elements%2C%20purple%20gradient%20background%2C%20minimalist%20style%2C%20professional%20look%2C%20suitable%20for%20a%20learning%20platform%20category%20icon&width=200&height=200&seq=cat-5&orientation=squarish",
+                image: "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=200&h=200&fit=crop",
               },
               {
                 name: "Personal Development",
                 icon: "fa-brain",
-                image:
-                  "https://readdy.ai/api/search-image?query=Personal%20growth%20and%20development%20concept%20with%20brain%2C%20lightbulb%2C%20purple%20gradient%20background%2C%20minimalist%20style%2C%20professional%20look%2C%20suitable%20for%20a%20learning%20platform%20category%20icon&width=200&height=200&seq=cat-6&orientation=squarish",
+                image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=200&h=200&fit=crop",
               },
             ].map((category, index) => (
               <div
@@ -249,10 +243,9 @@ export default function Home() {
                 title: "Complete Web Development Bootcamp",
                 instructor: "Sarah Johnson",
                 rating: 4.9,
-                students: 15420,
+                students: 15680,
                 price: "$89.99",
-                image:
-                  "https://readdy.ai/api/search-image?query=Web%20development%20course%20thumbnail%20showing%20code%20editor%2C%20modern%20website%20design%2C%20clean%20interface%20with%20purple%20accents%2C%20professional%20look%2C%20suitable%20for%20online%20learning%20platform&width=400&height=225&seq=course-1&orientation=landscape",
+                image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=225&fit=crop",
               },
               {
                 title: "Data Science: Python for Beginners",
@@ -260,8 +253,7 @@ export default function Home() {
                 rating: 4.8,
                 students: 8750,
                 price: "$79.99",
-                image:
-                  "https://readdy.ai/api/search-image?query=Data%20science%20course%20thumbnail%20showing%20Python%20code%2C%20data%20visualization%20charts%2C%20clean%20interface%20with%20purple%20accents%2C%20professional%20look%2C%20suitable%20for%20online%20learning%20platform&width=400&height=225&seq=course-2&orientation=landscape",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=225&fit=crop",
               },
               {
                 title: "UI/UX Design Masterclass",
@@ -269,8 +261,7 @@ export default function Home() {
                 rating: 4.9,
                 students: 12380,
                 price: "$94.99",
-                image:
-                  "https://readdy.ai/api/search-image?query=UI%20UX%20design%20course%20thumbnail%20showing%20design%20software%2C%20wireframes%2C%20color%20palettes%2C%20clean%20interface%20with%20purple%20accents%2C%20professional%20look%2C%20suitable%20for%20online%20learning%20platform&width=400&height=225&seq=course-3&orientation=landscape",
+                image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=225&fit=crop",
               },
               {
                 title: "Digital Marketing Strategy",
@@ -278,8 +269,7 @@ export default function Home() {
                 rating: 4.7,
                 students: 9650,
                 price: "$69.99",
-                image:
-                  "https://readdy.ai/api/search-image?query=Digital%20marketing%20course%20thumbnail%20showing%20analytics%20dashboard%2C%20social%20media%20icons%2C%20clean%20interface%20with%20purple%20accents%2C%20professional%20look%2C%20suitable%20for%20online%20learning%20platform&width=400&height=225&seq=course-4&orientation=landscape",
+                image: "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=400&h=225&fit=crop",
               },
               {
                 title: "Business Leadership & Management",
@@ -287,8 +277,7 @@ export default function Home() {
                 rating: 4.8,
                 students: 7820,
                 price: "$84.99",
-                image:
-                  "https://readdy.ai/api/search-image?query=Business%20leadership%20course%20thumbnail%20showing%20professional%20meeting%2C%20leadership%20concepts%2C%20clean%20interface%20with%20purple%20accents%2C%20professional%20look%2C%20suitable%20for%20online%20learning%20platform&width=400&height=225&seq=course-5&orientation=landscape",
+                image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=225&fit=crop",
               },
               {
                 title: "Machine Learning Fundamentals",
@@ -296,8 +285,7 @@ export default function Home() {
                 rating: 4.9,
                 students: 11250,
                 price: "$99.99",
-                image:
-                  "https://readdy.ai/api/search-image?query=Machine%20learning%20course%20thumbnail%20showing%20AI%20algorithms%2C%20neural%20networks%20visualization%2C%20clean%20interface%20with%20purple%20accents%2C%20professional%20look%2C%20suitable%20for%20online%20learning%20platform&width=400&height=225&seq=course-6&orientation=landscape",
+                image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=225&fit=crop",
               },
             ].map((course, index) => (
               <div
@@ -369,22 +357,19 @@ export default function Home() {
               {
                 name: "Emily Thompson",
                 role: "Web Developer",
-                image:
-                  "https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20young%20woman%20with%20a%20friendly%20smile%2C%20neutral%20background%2C%20high%20quality%20portrait%20suitable%20for%20a%20testimonial%2C%20natural%20lighting%2C%20professional%20appearance&width=100&height=100&seq=testimonial-1&orientation=squarish",
+                image: "https://via.placeholder.com/100x100/6366f1/ffffff?text=ET",
                 text: "The web development bootcamp completely changed my career path. I went from knowing nothing about coding to landing a job as a junior developer in just 6 months. The instructors were incredibly supportive and the course content was comprehensive and up-to-date.",
               },
               {
                 name: "Marcus Johnson",
                 role: "Data Analyst",
-                image:
-                  "https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20young%20man%20with%20a%20friendly%20smile%2C%20neutral%20background%2C%20high%20quality%20portrait%20suitable%20for%20a%20testimonial%2C%20natural%20lighting%2C%20professional%20appearance&width=100&height=100&seq=testimonial-2&orientation=squarish",
+                image: "https://via.placeholder.com/100x100/6366f1/ffffff?text=MJ",
                 text: "I've taken several data science courses on this platform, and they've all been exceptional. The hands-on projects really helped me apply what I learned, and I was able to build a portfolio that impressed my employers. Now I'm working as a data analyst at a tech company I love.",
               },
               {
                 name: "Sophia Garcia",
                 role: "UX Designer",
-                image:
-                  "https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20woman%20with%20a%20friendly%20smile%2C%20neutral%20background%2C%20high%20quality%20portrait%20suitable%20for%20a%20testimonial%2C%20natural%20lighting%2C%20professional%20appearance&width=100&height=100&seq=testimonial-3&orientation=squarish",
+                image: "https://via.placeholder.com/100x100/6366f1/ffffff?text=SG",
                 text: "The UI/UX Design Masterclass was exactly what I needed to transition into design. The instructor broke down complex concepts into easy-to-understand modules, and the community support was incredible. I'm now freelancing as a UX designer and loving every minute of it.",
               },
             ].map((testimonial, index) => (

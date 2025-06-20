@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { useUser } from '@clerk/nextjs';
+import { SignOutButton, useUser } from '@clerk/nextjs';
 import { 
   FaBook, 
   FaUsers, 
@@ -48,6 +48,7 @@ export default function InstructorDashboard() {
     averageRating: 0,
     totalCourses: 0
   });
+  const [loading, setLoading] = useState(true); // <-- Add loading state
 
   // Fetch instructor data
   React.useEffect(() => {
@@ -78,6 +79,8 @@ export default function InstructorDashboard() {
       } catch (error) {
         console.error('Error fetching instructor data:', error);
         toast.error('Failed to load instructor data');
+      } finally {
+        setLoading(false); // <-- Set loading to false after fetch
       }
     };
 
@@ -97,6 +100,28 @@ export default function InstructorDashboard() {
     toast.error('Course deletion functionality not implemented');
   };
 
+  // Loading screen
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-purple-500 border-b-4 mb-8"></div>
+        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="p-6 rounded-xl shadow-md bg-white animate-pulse flex flex-col gap-4">
+              <div className="h-10 w-10 bg-purple-100 rounded-full"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+              <div className="h-6 bg-gray-300 rounded w-1/3"></div>
+            </div>
+          ))}
+        </div>
+        <div className="w-full max-w-4xl mt-8">
+          <div className="h-40 bg-white rounded-xl shadow-md animate-pulse"></div>
+        </div>
+        <div className="mt-8 text-purple-600 font-semibold text-lg">Loading your dashboard...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100">
       <div className="max-w-7xl mx-auto px-6 py-8">
@@ -107,12 +132,22 @@ export default function InstructorDashboard() {
               <h1 className="text-4xl font-bold text-white mb-1">Learnify Instructor</h1>
               <p className="text-purple-100">Welcome back, {user?.firstName || 'Instructor'}. Manage your courses and track your progress.</p>
             </div>
-            <Button
-              onClick={handleCreateCourse}
-              className="mt-4 md:mt-0 bg-white text-purple-700 hover:bg-purple-100 px-6 py-2 rounded-lg font-semibold shadow transition-all duration-200 flex items-center"
-            >
-              <FaPlus className="mr-2" /> Create New Course
-            </Button>
+            <div className="flex gap-3 mt-4 md:mt-0">
+              <Button
+                onClick={handleCreateCourse}
+                className="bg-white text-purple-700 hover:bg-purple-100 px-6 py-2 rounded-lg font-semibold shadow transition-all duration-200 flex items-center"
+              >
+                <FaPlus className="mr-2" /> Create New Course
+              </Button>
+              <SignOutButton>
+                <Button
+                  className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-semibold shadow transition-all duration-200 flex items-center"
+                  type="button"
+                >
+                  Logout
+                </Button>
+              </SignOutButton>
+            </div>
           </div>
         </div>
 

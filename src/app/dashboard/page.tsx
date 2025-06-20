@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useUser } from '@clerk/nextjs';
+import * as Tooltip from '@radix-ui/react-tooltip';
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -13,83 +16,84 @@ import {
   Search, 
   Calendar,
   ChevronRight,
-  Clock
+  Clock,
+  Menu,
+  X
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { cn } from "@/lib/utils";
 
+const sidebarItems = [
+  { icon: LayoutDashboard, label: 'Dashboard', id: 'dashboard' },
+  { icon: BookOpen, label: 'My Courses', id: 'courses' },
+  { icon: Award, label: 'Certificates', id: 'certificates' },
+  { icon: UserRound, label: 'Profile', id: 'profile' },
+  { icon: Settings, label: 'Settings', id: 'settings' },
+  { icon: LogOut, label: 'Logout', id: 'logout' },
+];
+
+const enrolledCourses = [
+  {
+    id: 1,
+    title: 'Complete Web Development Bootcamp',
+    instructor: 'Sarah Johnson',
+    thumbnail: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=225&fit=crop',
+    progress: 68,
+    lastLesson: 'CSS Grid and Flexbox Layout Techniques',
+  },
+  {
+    id: 2,
+    title: 'Data Science: Python for Beginners',
+    instructor: 'Michael Chen',
+    thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=225&fit=crop',
+    progress: 42,
+    lastLesson: 'Data Visualization with Matplotlib',
+  },
+  {
+    id: 3,
+    title: 'UI/UX Design Masterclass',
+    instructor: 'Emma Rodriguez',
+    thumbnail: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=225&fit=crop',
+    progress: 24,
+    lastLesson: 'Principles of Visual Hierarchy',
+  }
+];
+
+const certificates = [
+  {
+    id: 1,
+    title: 'JavaScript Fundamentals',
+    issueDate: 'May 15, 2025',
+    thumbnail: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=200&h=150&fit=crop'
+  },
+  {
+    id: 2,
+    title: 'HTML & CSS Mastery',
+    issueDate: 'March 22, 2025',
+    thumbnail: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=200&h=150&fit=crop'
+  }
+];
+
+const deadlines = [
+  {
+    id: 1,
+    title: 'JavaScript Quiz',
+    course: 'Web Development Bootcamp',
+    dueDate: 'June 10, 2025',
+    type: 'Quiz',
+  },
+  {
+    id: 2,
+    title: 'Final Project Submission',
+    course: 'UI/UX Design Masterclass',
+    dueDate: 'June 15, 2025',
+    type: 'Assignment',
+  }
+];
+
 export default function StudentDashboard() {
+  const { user } = useUser();
   const [activeSidebarItem, setActiveSidebarItem] = useState('dashboard');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-
-  const sidebarItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', id: 'dashboard' },
-    { icon: BookOpen, label: 'My Courses', id: 'courses' },
-    { icon: Award, label: 'Certificates', id: 'certificates' },
-    { icon: UserRound, label: 'Profile', id: 'profile' },
-    { icon: Settings, label: 'Settings', id: 'settings' },
-    { icon: LogOut, label: 'Logout', id: 'logout' },
-  ];
-
-  const enrolledCourses = [
-    {
-      id: 1,
-      title: 'Complete Web Development Bootcamp',
-      instructor: 'Sarah Johnson',
-      thumbnail: 'https://readdy.ai/api/search-image?query=Web%20development%20course%20thumbnail%20showing%20code%20editor%2C%20modern%20website%20design%2C%20clean%20interface%20with%20purple%20accents%2C%20professional%20look%2C%20suitable%20for%20online%20learning%20platform&width=400&height=225&seq=course-1&orientation=landscape',
-      progress: 68,
-      lastLesson: 'CSS Grid and Flexbox Layout Techniques',
-    },
-    {
-      id: 2,
-      title: 'Data Science: Python for Beginners',
-      instructor: 'Michael Chen',
-      thumbnail: 'https://readdy.ai/api/search-image?query=Data%20science%20course%20thumbnail%20showing%20Python%20code%2C%20data%20visualization%20charts%2C%20clean%20interface%20with%20purple%20accents%2C%20professional%20look%2C%20suitable%20for%20online%20learning%20platform&width=400&height=225&seq=course-2&orientation=landscape',
-      progress: 42,
-      lastLesson: 'Data Visualization with Matplotlib',
-    },
-    {
-      id: 3,
-      title: 'UI/UX Design Masterclass',
-      instructor: 'Emma Rodriguez',
-      thumbnail: 'https://readdy.ai/api/search-image?query=UI%20UX%20design%20course%20thumbnail%20showing%20design%20software%2C%20wireframes%2C%20color%20palettes%2C%20clean%20interface%20with%20purple%20accents%2C%20professional%20look%2C%20suitable%20for%20online%20learning%20platform&width=400&height=225&seq=course-3&orientation=landscape',
-      progress: 24,
-      lastLesson: 'Principles of Visual Hierarchy',
-    }
-  ];
-
-
-  const certificates = [
-    {
-      id: 1,
-      title: 'JavaScript Fundamentals',
-      issueDate: 'May 15, 2025',
-      thumbnail: 'https://readdy.ai/api/search-image?query=Certificate%20template%20with%20purple%20accents%20for%20JavaScript%20course%20completion%2C%20professional%20design%2C%20clean%20layout&width=200&height=150&seq=cert-1&orientation=landscape'
-    },
-    {
-      id: 2,
-      title: 'HTML & CSS Mastery',
-      issueDate: 'March 22, 2025',
-      thumbnail: 'https://readdy.ai/api/search-image?query=Certificate%20template%20with%20purple%20accents%20for%20HTML%20and%20CSS%20course%20completion%2C%20professional%20design%2C%20clean%20layout&width=200&height=150&seq=cert-2&orientation=landscape'
-    }
-  ];
-
-  const deadlines = [
-    {
-      id: 1,
-      title: 'JavaScript Quiz',
-      course: 'Web Development Bootcamp',
-      dueDate: 'June 10, 2025',
-      type: 'Quiz',
-    },
-    {
-      id: 2,
-      title: 'Final Project Submission',
-      course: 'UI/UX Design Masterclass',
-      dueDate: 'June 15, 2025',
-      type: 'Assignment',
-    }
-  ];
 
   const toggleMobileSidebar = () => {
     setIsMobileSidebarOpen(!isMobileSidebarOpen);
@@ -102,64 +106,99 @@ export default function StudentDashboard() {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar - Desktop */}
-      <div className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200">
+      <motion.div 
+        initial={{ x: -300 }}
+        animate={{ x: 0 }}
+        className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200"
+      >
         <div className="p-4 border-b border-gray-200">
-          <div className="flex items-center justify-center">
-            <span className="text-2xl font-bold text-purple-700">Learnify</span>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-center"
+          >
+            <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
+              Learnify
+            </span>
+          </motion.div>
         </div>
         <div className="flex flex-col flex-1 overflow-y-auto p-4">
           <nav className="flex-1 space-y-1">
             {sidebarItems.map((item) => (
-              <button
-                key={item.id}
-                className={cn(
-                  "flex items-center px-4 py-3 rounded-lg transition-all w-full",
-                  activeSidebarItem === item.id
-                    ? "bg-purple-50 text-purple-700" 
-                    : "text-gray-600 hover:bg-purple-50 hover:text-purple-700"
-                )}
-                onClick={() => setActiveSidebarItem(item.id)}
-              >
-                <item.icon className="h-5 w-5 mr-3" />
-                <span className="text-sm font-medium">{item.label}</span>
-              </button>
+              <Tooltip.Provider key={item.id}>
+                <Tooltip.Root>
+                  <Tooltip.Trigger asChild>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={cn(
+                        "flex items-center px-4 py-3 rounded-lg transition-all w-full",
+                        activeSidebarItem === item.id
+                          ? "bg-purple-50 text-purple-700" 
+                          : "text-gray-600 hover:bg-purple-50 hover:text-purple-700"
+                      )}
+                      onClick={() => setActiveSidebarItem(item.id)}
+                    >
+                      <item.icon className="h-5 w-5 mr-3" />
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </motion.button>
+                  </Tooltip.Trigger>
+                  <Tooltip.Portal>
+                    <Tooltip.Content
+                      className="bg-white px-3 py-2 rounded-lg shadow-lg text-sm"
+                      sideOffset={5}
+                    >
+                      {item.label}
+                      <Tooltip.Arrow className="fill-white" />
+                    </Tooltip.Content>
+                  </Tooltip.Portal>
+                </Tooltip.Root>
+              </Tooltip.Provider>
             ))}
           </nav>
         </div>
-      </div>
+      </motion.div>
 
       {/* Mobile Sidebar Overlay */}
-      {isMobileSidebarOpen && (
-        <div 
-          className="md:hidden fixed inset-0 bg-gray-800 bg-opacity-50 z-30"
-          onClick={toggleMobileSidebar}
-        />
-      )}
+      <AnimatePresence>
+        {isMobileSidebarOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="md:hidden fixed inset-0 bg-gray-800 bg-opacity-50 z-30"
+            onClick={toggleMobileSidebar}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Sidebar - Mobile */}
-      <div className={cn(
-        "md:hidden fixed inset-y-0 left-0 z-40 w-64 bg-white transform transition-transform duration-300 ease-in-out",
-        isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
-      )}>
+      <motion.div 
+        initial={{ x: -300 }}
+        animate={{ x: isMobileSidebarOpen ? 0 : -300 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="md:hidden fixed inset-y-0 left-0 z-40 w-64 bg-white"
+      >
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center justify-between">
-            <span className="text-2xl font-bold text-purple-700">Learnify</span>
+            <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
+              Learnify
+            </span>
             <button 
               onClick={toggleMobileSidebar}
               className="text-gray-500 hover:text-gray-600"
             >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X className="h-6 w-6" />
             </button>
           </div>
         </div>
         <div className="flex flex-col flex-1 overflow-y-auto p-4">
           <nav className="flex-1 space-y-1">
             {sidebarItems.map((item) => (
-              <button
+              <motion.button
                 key={item.id}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 className={cn(
                   "flex items-center px-4 py-3 rounded-lg transition-all w-full",
                   activeSidebarItem === item.id
@@ -173,34 +212,47 @@ export default function StudentDashboard() {
               >
                 <item.icon className="h-5 w-5 mr-3" />
                 <span className="text-sm font-medium">{item.label}</span>
-              </button>
+              </motion.button>
             ))}
           </nav>
         </div>
-      </div>
+      </motion.div>
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Navigation Bar */}
-        <header className="bg-white border-b border-gray-200 shadow-sm z-10">
+        <motion.header 
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          className="bg-white border-b border-gray-200 shadow-sm z-10"
+        >
           <div className="px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
             <div className="flex items-center">
-              {/* Mobile Menu Button */}
               <button
                 onClick={toggleMobileSidebar}
                 className="md:hidden text-gray-500 hover:text-gray-600 focus:outline-none"
               >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+                <Menu className="h-6 w-6" />
               </button>
               <div className="ml-4 md:ml-0">
-                <h1 className="text-xl font-semibold text-gray-800">Hi Arjav 👋</h1>
-                <p className="text-sm text-gray-500">Welcome back to your dashboard</p>
+                <motion.h1 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="text-xl font-semibold text-gray-800"
+                >
+                  Hi {user?.firstName || 'there'} 👋
+                </motion.h1>
+                <motion.p 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="text-sm text-gray-500"
+                >
+                  Welcome back to your dashboard
+                </motion.p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              {/* Search */}
               <div className="hidden md:flex items-center relative">
                 <Search className="absolute left-3 h-4 w-4 text-gray-400" />
                 <input
@@ -209,25 +261,46 @@ export default function StudentDashboard() {
                   className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-purple-500 focus:border-purple-500 transition-colors text-sm bg-gray-50"
                 />
               </div>
-              {/* Notifications */}
-              <button className="relative p-1 rounded-full text-gray-500 hover:bg-gray-100">
-                <Bell className="h-5 w-5" />
-                <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
-              </button>
-              {/* Profile */}
-              <div className="flex items-center">
+              <Tooltip.Provider>
+                <Tooltip.Root>
+                  <Tooltip.Trigger asChild>
+                    <motion.button 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="relative p-1 rounded-full text-gray-500 hover:bg-gray-100"
+                    >
+                      <Bell className="h-5 w-5" />
+                      <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+                    </motion.button>
+                  </Tooltip.Trigger>
+                  <Tooltip.Portal>
+                    <Tooltip.Content
+                      className="bg-white px-3 py-2 rounded-lg shadow-lg text-sm"
+                      sideOffset={5}
+                    >
+                      You have 3 new notifications
+                      <Tooltip.Arrow className="fill-white" />
+                    </Tooltip.Content>
+                  </Tooltip.Portal>
+                </Tooltip.Root>
+              </Tooltip.Provider>
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center"
+              >
                 <div className="relative h-8 w-8 rounded-full overflow-hidden border border-gray-200">
                   <Image
-                    src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20young%20man%20with%20a%20friendly%20smile%2C%20neutral%20background%2C%20high%20quality%20portrait%20suitable%20for%20a%20testimonial%2C%20natural%20lighting%2C%20professional%20appearance&width=100&height=100&seq=testimonial-2&orientation=squarish"
+                    src={user?.imageUrl || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop"}
                     alt="Avatar"
                     fill
                     className="object-cover"
                   />
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </header>
+        </motion.header>
 
         {/* Dashboard Content */}
         <main className="flex-1 overflow-y-auto bg-gray-50 p-4 sm:p-6 lg:p-8">
@@ -236,13 +309,20 @@ export default function StudentDashboard() {
               {/* Left Column - Continue Learning and My Courses */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Continue Learning */}
-                <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-white rounded-xl shadow-sm overflow-hidden"
+                >
                   <div className="p-6">
                     <div className="flex justify-between items-center mb-4">
                       <h2 className="text-lg font-semibold text-gray-800">Continue Learning</h2>
-                      <span className="text-sm text-purple-700 hover:underline cursor-pointer flex items-center">
+                      <motion.span 
+                        whileHover={{ x: 5 }}
+                        className="text-sm text-purple-700 hover:underline cursor-pointer flex items-center"
+                      >
                         View all my courses <ChevronRight className="h-4 w-4 ml-1" />
-                      </span>
+                      </motion.span>
                     </div>
                     <div className="relative">
                       <div className="aspect-video relative rounded-lg overflow-hidden">
@@ -252,245 +332,195 @@ export default function StudentDashboard() {
                           fill
                           className="object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                         <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <h3 className="text-white font-medium mb-1 text-lg line-clamp-2">
-                            {enrolledCourses[0].title}
-                          </h3>
-                          <p className="text-white/80 text-sm mb-3">
-                            {enrolledCourses[0].instructor}
-                          </p>
-                          <div className="flex justify-between items-center">
-                            <div className="w-3/4">
-                              <div className="h-1.5 bg-white/30 rounded-full">
-                                <div 
-                                  className="h-1.5 bg-white rounded-full" 
-                                  style={{ width: `${enrolledCourses[0].progress}%` }}
-                                ></div>
-                              </div>
-                              <div className="mt-1 flex justify-between">
-                                <span className="text-xs text-white/80">
-                                  {enrolledCourses[0].progress}% complete
-                                </span>
-                                <span className="text-xs text-white/80">
-                                  {Math.round((100 - enrolledCourses[0].progress) * 0.12)} hours left
-                                </span>
-                              </div>
-                            </div>
-                            <Button className="bg-white text-purple-700 hover:bg-white/90 rounded-lg">
-                              Resume
-                            </Button>
+                          <h3 className="text-white font-semibold mb-1">{enrolledCourses[0].title}</h3>
+                          <p className="text-white/80 text-sm mb-2">{enrolledCourses[0].lastLesson}</p>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <motion.div 
+                              initial={{ width: 0 }}
+                              animate={{ width: `${enrolledCourses[0].progress}%` }}
+                              transition={{ duration: 1, ease: "easeOut" }}
+                              className="bg-purple-600 h-2 rounded-full"
+                            />
                           </div>
-                        </div>
-                      </div>
-                      <div className="mt-4">
-                        <h4 className="text-sm font-medium text-gray-800">Next Lesson</h4>
-                        <div className="mt-2 flex items-center justify-between p-3 border border-gray-100 rounded-lg bg-gray-50">
-                          <div className="flex items-center">
-                            <div className="bg-purple-100 p-2 rounded-lg">
-                              <Clock className="h-5 w-5 text-purple-700" />
-                            </div>
-                            <div className="ml-3">
-                              <p className="text-sm font-medium text-gray-800">
-                                {enrolledCourses[0].lastLesson}
-                              </p>
-                              <p className="text-xs text-gray-500">Duration: 22 min</p>
-                            </div>
+                          <div className="flex justify-between items-center mt-2">
+                            <span className="text-white/80 text-sm">{enrolledCourses[0].progress}% Complete</span>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              className="bg-purple-600 text-white px-4 py-1 rounded-lg text-sm hover:bg-purple-700 transition-colors"
+                            >
+                              Continue
+                            </motion.button>
                           </div>
-                          <Button className="text-white bg-purple-700 hover:bg-purple-800">
-                            Continue
-                          </Button>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                
+                </motion.div>
+
                 {/* My Courses */}
-                <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="bg-white rounded-xl shadow-sm overflow-hidden"
+                >
                   <div className="p-6">
-                    <div className="flex justify-between items-center mb-4">
-                      <h2 className="text-lg font-semibold text-gray-800">My Courses</h2>
-                      <span className="text-sm text-purple-700 hover:underline cursor-pointer flex items-center">
-                        View all <ChevronRight className="h-4 w-4 ml-1" />
-                      </span>
-                    </div>
-                    <div className="space-y-4">
+                    <h2 className="text-lg font-semibold text-gray-800 mb-4">My Courses</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {enrolledCourses.slice(1).map((course) => (
-                        <div key={course.id} className="flex flex-col sm:flex-row gap-4 border border-gray-100 rounded-lg p-4">
-                          <div className="relative w-full sm:w-36 h-20 shrink-0">
+                        <motion.div
+                          key={course.id}
+                          whileHover={{ scale: 1.02 }}
+                          className="bg-gray-50 rounded-lg overflow-hidden"
+                        >
+                          <div className="aspect-video relative">
                             <Image
                               src={course.thumbnail}
                               alt={course.title}
                               fill
-                              className="rounded-lg object-cover"
+                              className="object-cover"
                             />
                           </div>
-                          <div className="flex-1">
-                            <h3 className="font-medium text-gray-800 line-clamp-1">{course.title}</h3>
+                          <div className="p-4">
+                            <h3 className="font-medium text-gray-800 mb-1">{course.title}</h3>
                             <p className="text-sm text-gray-500 mb-2">Instructor: {course.instructor}</p>
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                              <div className="w-full sm:w-2/3">
-                                <div className="h-1.5 bg-gray-100 rounded-full">
-                                  <div 
-                                    className="h-1.5 bg-purple-700 rounded-full" 
-                                    style={{ width: `${course.progress}%` }}
-                                  ></div>
-                                </div>
-                                <p className="mt-1 text-xs text-gray-500">{course.progress}% completed</p>
-                              </div>
-                              <Button
-                                variant="outline" 
-                                className="text-purple-700 border-purple-700 hover:bg-purple-50"
+                            <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                              <motion.div 
+                                initial={{ width: 0 }}
+                                animate={{ width: `${course.progress}%` }}
+                                transition={{ duration: 1, ease: "easeOut" }}
+                                className="bg-purple-600 h-2 rounded-full"
+                              />
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm text-gray-500">{course.progress}% Complete</span>
+                              <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="text-purple-600 hover:text-purple-700 text-sm font-medium"
                               >
-                                Resume
-                              </Button>
+                                Continue
+                              </motion.button>
                             </div>
                           </div>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               {/* Right Column - Progress and Deadlines */}
               <div className="space-y-6">
-                {/* Progress Overview */}
-                <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-                  <div className="p-6">
-                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Progress Overview</h2>
-                    <div className="flex justify-center">
-                      <div className="relative h-40 w-40">
-                        {/* Circle Progress SVG */}
-                        <svg className="w-full h-full" viewBox="0 0 100 100">
-                          {/* Background Circle */}
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="40"
-                            fill="none"
-                            stroke="#EDE9FE"
-                            strokeWidth="8"
-                          />
-                          {/* Progress Circle */}
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="40"
-                            fill="none"
-                            stroke="#7C3AED"
-                            strokeWidth="8"
-                            strokeLinecap="round"
-                            strokeDasharray={`${overallProgress * 2.51} 251`}
-                            strokeDashoffset="0"
-                            transform="rotate(-90 50 50)"
-                          />
-                          <text
-                            x="50%"
-                            y="50%"
-                            dominantBaseline="middle"
-                            textAnchor="middle"
-                            fontSize="18"
-                            fontWeight="bold"
-                            fill="#7C3AED"
-                          >
-                            {`${overallProgress}%`}
-                          </text>
-                          <text
-                            x="50%"
-                            y="65%"
-                            dominantBaseline="middle"
-                            textAnchor="middle"
-                            fontSize="10"
-                            fill="#6B7280"
-                          >
-                            completed
-                          </text>
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="mt-4 grid grid-cols-2 gap-4 text-center">
-                      <div className="bg-gray-50 p-3 rounded-lg">
-                        <p className="text-sm text-gray-500">Courses</p>
-                        <p className="text-xl font-bold text-purple-700">{enrolledCourses.length}</p>
-                      </div>
-                      <div className="bg-gray-50 p-3 rounded-lg">
-                        <p className="text-sm text-gray-500">Hours</p>
-                        <p className="text-xl font-bold text-purple-700">42</p>
+                {/* Overall Progress */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="bg-white rounded-xl shadow-sm p-6"
+                >
+                  <h2 className="text-lg font-semibold text-gray-800 mb-4">Overall Progress</h2>
+                  <div className="flex items-center justify-center">
+                    <div className="relative w-32 h-32">
+                      <svg className="w-full h-full" viewBox="0 0 100 100">
+                        <circle
+                          className="text-gray-200"
+                          strokeWidth="8"
+                          stroke="currentColor"
+                          fill="transparent"
+                          r="40"
+                          cx="50"
+                          cy="50"
+                        />
+                        <motion.circle
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: overallProgress / 100 }}
+                          transition={{ duration: 1, ease: "easeOut" }}
+                          className="text-purple-600"
+                          strokeWidth="8"
+                          strokeLinecap="round"
+                          stroke="currentColor"
+                          fill="transparent"
+                          r="40"
+                          cx="50"
+                          cy="50"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-2xl font-bold text-gray-800">{overallProgress}%</span>
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Upcoming Deadlines */}
-                <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-                  <div className="p-6">
-                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Upcoming Deadlines</h2>
-                    <div className="space-y-3">
-                      {deadlines.map(deadline => (
-                        <div key={deadline.id} className="flex items-center p-3 border border-gray-100 rounded-lg">
-                          <div className="bg-purple-100 p-2 rounded-lg">
-                            <Calendar className="h-5 w-5 text-purple-700" />
-                          </div>
-                          <div className="ml-3 flex-1">
-                            <p className="text-sm font-medium text-gray-800">{deadline.title}</p>
-                            <p className="text-xs text-gray-500">{deadline.course}</p>
-                          </div>
-                          <div className="text-right">
-                            <span className={cn(
-                              "text-xs px-2 py-1 rounded-full",
-                              deadline.type === 'Quiz' 
-                                ? "bg-blue-50 text-blue-700" 
-                                : "bg-amber-50 text-amber-700"
-                            )}>
-                              {deadline.type}
-                            </span>
-                            <p className="text-xs text-gray-500 mt-1">{deadline.dueDate}</p>
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="bg-white rounded-xl shadow-sm p-6"
+                >
+                  <h2 className="text-lg font-semibold text-gray-800 mb-4">Upcoming Deadlines</h2>
+                  <div className="space-y-4">
+                    {deadlines.map((deadline) => (
+                      <motion.div
+                        key={deadline.id}
+                        whileHover={{ scale: 1.02 }}
+                        className="flex items-start space-x-3 p-3 rounded-lg bg-gray-50"
+                      >
+                        <div className="flex-shrink-0">
+                          <Calendar className="h-5 w-5 text-purple-600" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-800">{deadline.title}</p>
+                          <p className="text-sm text-gray-500">{deadline.course}</p>
+                          <div className="flex items-center mt-1">
+                            <Clock className="h-4 w-4 text-gray-400 mr-1" />
+                            <span className="text-xs text-gray-500">Due: {deadline.dueDate}</span>
                           </div>
                         </div>
-                      ))}
-                    </div>
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                          {deadline.type}
+                        </span>
+                      </motion.div>
+                    ))}
                   </div>
-                </div>
-                
-                {/* My Certificates */}
-                <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-                  <div className="p-6">
-                    <div className="flex justify-between items-center mb-4">
-                      <h2 className="text-lg font-semibold text-gray-800">My Certificates</h2>
-                      <span className="text-sm text-purple-700 hover:underline cursor-pointer flex items-center">
-                        View all <ChevronRight className="h-4 w-4 ml-1" />
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4">
-                      {certificates.map(certificate => (
-                        <div key={certificate.id} className="border border-gray-100 rounded-lg p-3 flex">
-                          <div className="relative w-20 h-14 shrink-0">
-                            <Image
-                              src={certificate.thumbnail}
-                              alt={certificate.title}
-                              fill
-                              className="rounded object-cover"
-                            />
-                          </div>
-                          <div className="ml-3 flex-1">
-                            <p className="text-sm font-medium text-gray-800">{certificate.title}</p>
-                            <p className="text-xs text-gray-500">Issued on {certificate.issueDate}</p>
-                            <button className="text-purple-700 text-xs mt-1 flex items-center">
-                              Download <ChevronRight className="h-3 w-3 ml-1" />
-                            </button>
-                          </div>
+                </motion.div>
+
+                {/* Certificates */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="bg-white rounded-xl shadow-sm p-6"
+                >
+                  <h2 className="text-lg font-semibold text-gray-800 mb-4">Certificates</h2>
+                  <div className="grid grid-cols-2 gap-4">
+                    {certificates.map((certificate) => (
+                      <motion.div
+                        key={certificate.id}
+                        whileHover={{ scale: 1.05 }}
+                        className="relative aspect-[4/3] rounded-lg overflow-hidden"
+                      >
+                        <Image
+                          src={certificate.thumbnail}
+                          alt={certificate.title}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                        <div className="absolute bottom-0 left-0 right-0 p-3">
+                          <h3 className="text-white text-sm font-medium">{certificate.title}</h3>
+                          <p className="text-white/80 text-xs">Issued: {certificate.issueDate}</p>
                         </div>
-                      ))}
-                    </div>
+                      </motion.div>
+                    ))}
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
-
-            {/* Recommended Courses */}
-            
           </div>
         </main>
       </div>
